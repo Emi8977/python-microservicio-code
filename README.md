@@ -1,14 +1,14 @@
 # python-microservicio-code
 ## Proyecto de microservicios con python
 ### Tecnologias
-a. Frontend:
+Frontend:
    1. HTML
    2. CSS
    3. Javascript
-b. Backend:
+Backend:
    1. Python con framework Flask
    2. API Gateway de KONG
-c. Base de datos:
+Base de datos:
    1. MongoAtlas
 
 ### Arquitectura del software
