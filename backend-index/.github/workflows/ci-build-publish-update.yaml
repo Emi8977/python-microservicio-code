@@ -65,7 +65,7 @@ jobs:
 
       - name: Parchar el deployment con el nuevo tag
         run: |
-          PATCH_FILE="python-microservicio-k8s/overlays/${{ steps.overlay.outputs.overlay }}/patch-deployment.yaml"   # <- corregido el path
+          PATCH_FILE="python-microservicio-k8s/overlays/${{ steps.overlay.outputs.overlay }}/patch-backend-index-deployment.yaml"   # <- corregido el path
 
           echo "Actualizando $PATCH_FILE con tag $IMAGE_TAG"
           sed -i "s|image: .*/microservicio-index:.*|image: $IMAGE_NAME:$IMAGE_TAG|g" "$PATCH_FILE"    # <- corregido el nombre de imagen en el sed
@@ -75,6 +75,6 @@ jobs:
           cd python-microservicio-k8s    
           git config user.email "ci@github.com"
           git config user.name "GitHub Actions"
-          git add overlays/${{ steps.overlay.outputs.overlay }}/patch-deployment.yaml
+          git add overlays/${{ steps.overlay.outputs.overlay }}/patch-backend-index-deployment.yaml
           git commit -m "ci: patch image tag to $IMAGE_TAG for ${{ steps.overlay.outputs.overlay }}" || echo "Sin cambios para commitear"
           git push
