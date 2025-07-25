@@ -7,7 +7,7 @@ on:
     paths:
       - 'backend-dashboard/**'
 env:
-  IMAGE_NAME: proyectoPython1/microservicio-dashboard
+  IMAGE_NAME: emi8977/microservicio-dashboard
   MANIFESTS_REPO: emi8977/python-microservicio-k8s  #aca declaramos el repositorio donde vamos a guardar los manifiestos
 
 jobs:
@@ -61,7 +61,7 @@ jobs:
 
       - name: Build & Push Docker Image
         run: |
-          docker build -t $IMAGE_NAME:$IMAGE_TAG .
+          docker build -t $IMAGE_NAME:$IMAGE_TAG ./backend-dashboard
           docker push $IMAGE_NAME:$IMAGE_TAG
 
       - name: Clonar repo de manifiestos (infra)
