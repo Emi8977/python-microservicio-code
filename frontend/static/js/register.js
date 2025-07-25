@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (response.ok) {
                     const data = isJson ? await response.json() : {};
                     alert(data.message || 'Registro exitoso');
-                    window.location.href = '/login'; // Redirige a login
+                    window.location.href = '/api/login'; // Redirige a login
                 } else {
                     const errorData = isJson ? await response.json() : { message: await response.text() };
                     alert(errorData.message || 'Error al registrar');
