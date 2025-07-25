@@ -1,3 +1,11 @@
+name: deploy-login-dev
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'backend-login/**'
 env:
   IMAGE_NAME: proyectoPython1/microservicio-login
   MANIFESTS_REPO: emi8977/python-microservicio-k8s  #aca declaramos el repositorio donde vamos a guardar los manifiestos
