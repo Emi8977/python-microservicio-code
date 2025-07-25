@@ -1,3 +1,11 @@
+name: deploy-index-dev
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'backend-index/**'
 env:
   IMAGE_NAME: proyectoPython1/microservicio-index
   MANIFESTS_REPO: emi8977/python-microservicio-k8s  #aca declaramos el repositorio donde vamos a guardar los manifiestos
