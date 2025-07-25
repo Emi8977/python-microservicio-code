@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
         msg.style.color = "green";
         msg.innerText = "Login exitoso";
         alert("Login exitoso");
-        window.location.href = "/dashboard";
+        window.location.href = "/api/dashboard";
       } else {
         const errorData = await res.json();
         msg.style.color = "red";
