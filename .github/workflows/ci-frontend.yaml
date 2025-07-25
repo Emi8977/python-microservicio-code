@@ -8,7 +8,7 @@ on:
       - 'frontend/**'
 
 env:
-  IMAGE_NAME: proyectoPython1/microservicio-front
+  IMAGE_NAME: emi8977/microservicio-front #usuariodockerhub/nombreProyecto
   MANIFESTS_REPO: emi8977/python-microservicio-k8s  #aca declaramos el repositorio donde vamos a guardar los manifiestos
 
 jobs:
