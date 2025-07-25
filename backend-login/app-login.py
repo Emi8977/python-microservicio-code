@@ -21,7 +21,7 @@ app.config["MONGO_URI"] = "mongodb+srv://actividadesitu:marcopolo89@micluster123
 
 mongo = PyMongo(app)
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/api/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         username = request.json.get('username')  # ← si estás usando JS y fetch
@@ -40,7 +40,7 @@ def login():
 
     return render_template('login.html')
 
-@app.route('/dashboard')
+@app.route('/api/dashboard')
 def dashboard_proxy():
     return render_template('dashboard.html')
 
