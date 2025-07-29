@@ -13,8 +13,16 @@ template_dir = os.path.abspath(os.path.join(base_dir, '..', 'frontend-service', 
 static_dir = os.path.abspath(os.path.join(base_dir, '..', 'frontend-service', 'static'))
 
 app = Flask(__name__, template_folder=template_dir, static_folder=static_dir)
-CORS(app)
-
+#CORS(app)
+CORS(app, resources={r"/api/*": {"origins": [
+    "http://127.0.0.1:5000",
+    "http://127.0.0.1:5002",
+    "http://127.0.0.1:5003",
+    "http://localhost:5000",
+    "http://localhost:5002",
+    "http://localhost:5003",
+    "https://atale.comercial.cloud"
+]}}, supports_credentials=True)
 #app = Flask(__name__) 
 #app = Flask(__name__, static_folder='static', template_folder='templates')
 

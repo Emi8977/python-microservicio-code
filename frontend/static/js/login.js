@@ -1,3 +1,9 @@
+const isLocalhost = ['localhost', '127.0.0.1'].includes(window.location.hostname);
+const API_BASE_URL = isLocalhost
+  ? 'http://127.0.0.1:5002'
+  : 'https://atale.comercial.cloud';
+
+
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("loginForm");
   const msg = document.getElementById("msg");
@@ -12,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     try {
-      const res = await fetch("/api/login", { //cambiamos la ruta de /localhost por /api
+      const res = await fetch(`${API_BASE_URL}/api/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -24,7 +30,13 @@ document.addEventListener("DOMContentLoaded", () => {
         msg.style.color = "green";
         msg.innerText = "Login exitoso";
         alert("Login exitoso");
-        window.location.href = "/api/dashboard";
+
+        // Redirigir al dashboard
+        if (window.location.hostname === 'localhost') {
+          window.location.href = `${window.location.origin}/dashboard`;
+        } else {
+          window.location.href = `${window.location.origin}/dashboard`;
+        }
       } else {
         const errorData = await res.json();
         msg.style.color = "red";
