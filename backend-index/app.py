@@ -2,7 +2,8 @@ from flask import Flask, render_template, redirect, url_for, request, jsonify
 from flask_pymongo import PyMongo
 from flask_cors import CORS
 import os
-
+#para desarrollo local, luego en ingress se encargará de redirigir con otra logica sin necesidad de este proxy
+from flask import redirect
 ##PROBANDO COMMIT
 
 # Obtener ruta absoluta de la carpeta donde está app.py
@@ -36,8 +37,7 @@ mongo = PyMongo(app)
 def index():
     return render_template('index.html')
 
-#para desarrollo local, luego en ingress se encargará de redirigir con otra logica sin necesidad de este proxy
-from flask import redirect
+
 
 @app.route('/login')
 def login_proxy():

@@ -1,4 +1,4 @@
-const isLocalhost = ['localhost', '127.0.0.1'].includes(window.location.hostname);
+/* const isLocalhost = ['localhost', '127.0.0.1'].includes(window.location.hostname);
 const API_BASE_URL = isLocalhost
   ? 'http://127.0.0.1:5002'
   : 'https://atale.comercial.cloud';
@@ -47,6 +47,30 @@ document.addEventListener("DOMContentLoaded", () => {
       msg.style.color = "red";
       msg.innerText = "Error de conexión al servidor";
       console.error(error);
+    }
+  });
+});
+
+*/
+import { Gateway, Redirect } from "./gateway.js";
+
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("loginForm");
+  const msg = document.getElementById("msg");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const username = form.username.value;
+    const password = form.password.value;
+
+    try {
+      await Gateway.Auth.login(username, password);
+      msg.style.color = "green";
+      msg.innerText = "Login exitoso";
+      Redirect.toDashboard();
+    } catch (err) {
+      msg.style.color = "red";
+      msg.innerText = err.message;
     }
   });
 });
