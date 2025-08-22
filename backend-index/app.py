@@ -1,6 +1,7 @@
 from flask import Flask, render_template, redirect, url_for, request, jsonify
 from flask_pymongo import PyMongo
 from flask_cors import CORS
+from flask import jsonify
 import os
 
 
@@ -30,7 +31,7 @@ CORS(app, resources={r"/api/*": {"origins": [
 app.config["MONGO_URI"] = "mongodb+srv://actividadesitu:marcopolo89@micluster123.mjgzogc.mongodb.net/pruebaMongoDB?retryWrites=true&w=majority"
 
 mongo = PyMongo(app)
-from flask import jsonify
+
 
 @app.route('/')
 def index():
@@ -58,6 +59,7 @@ def dashboard():
 
 if __name__ == '__main__':
     app.run(port=5000)
+
 
 
 
