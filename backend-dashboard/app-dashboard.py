@@ -3,7 +3,7 @@ from flask_pymongo import PyMongo
 from flask_cors import CORS
 import os
 
-##PROBANDO COMMIT
+##PROBANDO COMMIT 29/7
 
 # Obtener ruta absoluta de la carpeta donde está app.py
 base_dir = os.path.dirname(os.path.abspath(__file__))

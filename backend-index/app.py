@@ -2,9 +2,14 @@ from flask import Flask, render_template, redirect, url_for, request, jsonify
 from flask_pymongo import PyMongo
 from flask_cors import CORS
 import os
+<<<<<<< HEAD
 #para desarrollo local, luego en ingress se encargará de redirigir con otra logica sin necesidad de este proxy
 from flask import redirect
 ##PROBANDO COMMIT
+=======
+
+##PROBANDO COMMIT 29/7
+>>>>>>> 47fca141dde63ebd794ef7a72517e748fcb531bb
 
 # Obtener ruta absoluta de la carpeta donde está app.py
 base_dir = os.path.dirname(os.path.abspath(__file__))
