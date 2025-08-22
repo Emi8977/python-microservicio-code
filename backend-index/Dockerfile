@@ -9,9 +9,10 @@ RUN pip install Flask
 RUN pip install Flask flask_pymongo
 RUN pip install Flask flask_cors
 
-EXPOSE 5000
+EXPOSE 5002
 
 ENV FLASK_APP=app.py
 ENV FLASK_RUN_HOST=0.0.0.0
 
 CMD ["flask", "run"]
+
