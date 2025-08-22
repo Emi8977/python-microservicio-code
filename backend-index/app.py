@@ -1,64 +1,40 @@
-from flask import Flask, render_template, redirect, url_for, request, jsonify
-from flask_pymongo import PyMongo
-from flask_cors import CORS
-from flask import jsonify
+from flask import Flask, send_from_directory
 import os
 
-
-# Obtener ruta absoluta de la carpeta donde está app.py
+# Carpeta base dentro del contenedor
 base_dir = os.path.dirname(os.path.abspath(__file__))
 
-# Definir rutas absolutas para templates y static, yendo un nivel arriba y entrando a frontend-service
-template_dir = os.path.abspath(os.path.join(base_dir, '..', 'frontend', 'templates'))
-static_dir = os.path.abspath(os.path.join(base_dir, '..', 'frontend', 'static'))
+# Rutas relativas dentro del contenedor
+template_dir = os.path.join(base_dir, 'templates')
+static_dir = os.path.join(base_dir, 'static')
 
-app = Flask(__name__, template_folder=template_dir, static_folder=static_dir)
+app = Flask(__name__, static_folder=static_dir, template_folder=template_dir)
 
-#app = Flask(__name__) 
-#app = Flask(__name__, static_folder='static', template_folder='templates')
-#CORS(app)
-CORS(app, resources={r"/api/*": {"origins": [
-    "http://127.0.0.1:5000",
-    "http://127.0.0.1:5002",
-    "http://127.0.0.1:5003",
-    "http://localhost:5000",
-    "http://localhost:5002",
-    "http://localhost:5003",
-    "https://atale.comercial.cloud"
-]}}, supports_credentials=True)
-
-# Configuración de MongoDB (usando Mongo Atlas)
-app.config["MONGO_URI"] = "mongodb+srv://actividadesitu:marcopolo89@micluster123.mjgzogc.mongodb.net/pruebaMongoDB?retryWrites=true&w=majority"
-
-mongo = PyMongo(app)
-
-
+# Servir HTML
 @app.route('/')
 def index():
-    return render_template('index.html')
-
+    return send_from_directory(template_dir, 'index.html')
 
 @app.route('/login')
-def login_proxy():
-    return render_template('login.html')
+def login():
+    return send_from_directory(template_dir, 'login.html')
 
 @app.route('/register')
-def register_proxy():
-    return render_template('register.html')
+def register():
+    return send_from_directory(template_dir, 'register.html')
 
 @app.route('/dashboard')
 def dashboard():
-    return render_template('dashboard.html')
+    return send_from_directory(template_dir, 'dashboard.html')
 
-#print("Templates path:", template_dir)
-#print("Static path:", static_dir)
-#print("Archivos templates:", os.listdir(template_dir))
-#print("Archivos static/css:", os.listdir(os.path.join(static_dir, 'css')))
-
-
+# Servir estáticos (JS, CSS, imágenes)
+@app.route('/static/<path:path>')
+def static_files(path):
+    return send_from_directory(static_dir, path)
 
 if __name__ == '__main__':
-    app.run(port=5000)
+    app.run(host='0.0.0.0', port=5000)
+
 
 
 
