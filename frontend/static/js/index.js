@@ -1,5 +1,5 @@
 // Definimos la URL del backend según el entorno
-const backendUrl = window.location.hostname === "127.0.0.1" || window.location.hostname === "localhost"
+/*const backendUrl = window.location.hostname === "127.0.0.1" || window.location.hostname === "localhost"
   ? "http://127.0.0.1:5000/api"        // Desarrollo local
   : "https://atale.comercial.cloud/api"; // Producción en Kubernetes
 
@@ -17,4 +17,4 @@ fetch(backendUrl)
     document.getElementById("respuesta").innerText = "Error al conectar con backend";
     console.error(err);
   });
-
+*/
