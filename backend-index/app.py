@@ -30,11 +30,11 @@ CORS(app, resources={r"/api/*": {"origins": [
 app.config["MONGO_URI"] = "mongodb+srv://actividadesitu:marcopolo89@micluster123.mjgzogc.mongodb.net/pruebaMongoDB?retryWrites=true&w=majority"
 
 mongo = PyMongo(app)
+from flask import jsonify
 
 @app.route('/')
 def index():
-    return jsonfy({"status": "ok", "message": "hola..."})
-
+    return jsonify({"status": "ok", "message": "hola..."})
 
 
 @app.route('/login')
@@ -58,5 +58,6 @@ def dashboard():
 
 if __name__ == '__main__':
     app.run(port=5000)
+
 
 
