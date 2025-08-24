@@ -1,4 +1,5 @@
 // Contenedor donde se renderizarán las páginas
+console.log("router cargado ✅");
 const appContainer = document.getElementById("app");
 
 // Mapea rutas a endpoints de tu backend-index
