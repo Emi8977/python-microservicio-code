@@ -78,6 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 */
+/*
 import { Gateway, Redirect } from "./gateway.js";
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -102,6 +103,41 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Registro exitoso
                 alert(data.message || 'Usuario registrado exitosamente');
                 Redirect.toLogin(); // Redirige a login
+            } catch (err) {
+                console.error(err);
+                alert(err.message || 'Error inesperado al registrar');
+            }
+        });
+    }
+});
+
+*/
+import { Gateway } from "./gateway.js";
+
+document.addEventListener('DOMContentLoaded', function () {
+    const registerForm = document.getElementById('registerForm');
+
+    if (registerForm) {
+        registerForm.addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const username = registerForm.username.value.trim();
+            const password = registerForm.password.value.trim();
+
+            if (!username || !password) {
+                alert('Todos los campos son obligatorios.');
+                return;
+            }
+
+            try {
+                // Usamos el Gateway para registrar al usuario
+                const data = await Gateway.Auth.register(username, password);
+
+                // Registro exitoso
+                alert(data.message || 'Usuario registrado exitosamente');
+
+                // Redirige directamente a login.html sin usar Redirect
+                window.location.href = "/login.html";
             } catch (err) {
                 console.error(err);
                 alert(err.message || 'Error inesperado al registrar');
