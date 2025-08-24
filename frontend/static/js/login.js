@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 */
-import { Gateway, Redirect } from "./gateway.js";
+import { Gateway } from "./gateway.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("loginForm");
@@ -64,13 +64,21 @@ document.addEventListener("DOMContentLoaded", () => {
     const password = form.password.value;
 
     try {
-      await Gateway.Auth.login(username, password);
+      // Llamada a la API de login
+      const result = await Gateway.Auth.login(username, password);
+
+      // Mostrar mensaje de éxito
       msg.style.color = "green";
       msg.innerText = "Login exitoso";
-      Redirect.toDashboard();
+
+      // Redirigir a dashboard.html (archivo físico)
+      window.location.href = "/dashboard.html";
+
     } catch (err) {
+      // Mostrar mensaje de error
       msg.style.color = "red";
       msg.innerText = err.message;
     }
   });
 });
+
