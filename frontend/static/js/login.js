@@ -52,6 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 */
+/*
 import { Gateway } from "./gateway.js";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -81,4 +82,35 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+*/
+import { Gateway } from "./gateway.js";
+
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("loginForm");
+  const msg = document.getElementById("msg");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const username = form.username.value;
+    const password = form.password.value;
+
+    try {
+      // 🔹 Llamada a la API de login usando Gateway corregido
+      const result = await Gateway.Auth.login(username, password);
+
+      // Mostrar mensaje de éxito
+      msg.style.color = "green";
+      msg.innerText = "Login exitoso";
+
+      // 🔹 Redirige a dashboard.html (archivo físico)
+      window.location.href = "/dashboard.html";
+
+    } catch (err) {
+      // Mostrar mensaje de error
+      msg.style.color = "red";
+      msg.innerText = err.message;
+    }
+  });
+});
+
 
