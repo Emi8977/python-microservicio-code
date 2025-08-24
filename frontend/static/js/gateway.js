@@ -97,7 +97,7 @@ async function apiRequest(service, endpoint, options = {}) {
 
 export const Gateway = {
   Auth: {
-    login: async (username, password) => apiRequest( "/api/login", { //saco el auth para probar
+    login: async (username, password) => apiRequest( "auth","/login", { //saco el /api para probar
       method: "POST",
       body: JSON.stringify({ username, password })
     }),
