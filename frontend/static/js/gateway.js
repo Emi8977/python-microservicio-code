@@ -69,10 +69,10 @@ const isLocalhost = ['localhost', '127.0.0.1'].includes(window.location.hostname
 
 const SERVICES = isLocalhost
   ? {
-      frontend: "http://127.0.0.1:5000",    // HTML servido por backend-index
-      users:    "http://127.0.0.1:5001",    // Registro / Perfil
-      auth:     "http://127.0.0.1:5002",    // Login
-      dashboard:"http://127.0.0.1:5003"     // Dashboard
+      frontend: "http://127.0.0.1:5000",
+      users:    "http://127.0.0.1:5001",
+      auth:     "http://127.0.0.1:5002",
+      dashboard:"http://127.0.0.1:5003"
     }
   : {
       frontend: "https://atale.comercial.cloud",
@@ -81,7 +81,6 @@ const SERVICES = isLocalhost
       dashboard:"https://atale.comercial.cloud/dashboard"
     };
 
-// Función genérica para llamar a APIs
 async function apiRequest(service, endpoint, options = {}) {
   const res = await fetch(`${SERVICES[service]}${endpoint}`, {
     headers: { "Content-Type": "application/json", ...options.headers },
@@ -96,44 +95,21 @@ async function apiRequest(service, endpoint, options = {}) {
   return await res.json();
 }
 
-// Objeto Gateway
-const Gateway = {
+export const Gateway = {
   Auth: {
-    login: async (username, password) => {
-      const result = await apiRequest("auth", "/api/login", {
-        method: "POST",
-        body: JSON.stringify({ username, password })
-      });
-      return result;
-    },
-
-    register: async (username, password) => {
-      const result = await apiRequest("users", "/api/register", {
-        method: "POST",
-        credentials: "include",
-        body: JSON.stringify({ username, password })
-      });
-      return result;
-    }
+    login: async (username, password) => apiRequest("auth", "/api/login", {
+      method: "POST",
+      body: JSON.stringify({ username, password })
+    }),
+    register: async (username, password) => apiRequest("users", "/api/register", {
+      method: "POST",
+      body: JSON.stringify({ username, password })
+    })
   },
-
   Users: {
-    getProfile: (userId) => apiRequest("users", `/api/users/${userId}`, { method: "GET" })
+    getProfile: (userId) => apiRequest("users", `/api/users/${userId}`)
   },
-
   Dashboard: {
-    getData: () => apiRequest("dashboard", "/api/data", { method: "GET" })
+    getData: () => apiRequest("dashboard", "/api/data")
   }
 };
-
-// Redirecciones usando SPA (sin recargar la página)
-import { loadPage } from './router.js'; // <-- NUEVO: importamos loadPage desde router.js
-
-const Redirect = {
-  toLogin: () => loadPage('/login'),       // <-- reemplaza window.location.href
-  toRegister: () => loadPage('/register'),
-  toDashboard: () => loadPage('/dashboard'),
-  toIndex: () => loadPage('/')
-};
-
-export { Gateway, Redirect };
