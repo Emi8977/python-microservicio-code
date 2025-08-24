@@ -82,7 +82,7 @@ cors_origins = [
     "https://atale.comercial.cloud"
 ]
 
-CORS(app, supports_credentials=True, resources={r"/users/api/*": {"origins": cors_origins}})
+CORS(app, supports_credentials=True, resources={r"/api/*": {"origins": cors_origins}})
 
 # MongoDB
 app.config["MONGO_URI"] = "mongodb+srv://actividadesitu:marcopolo89@micluster123.mjgzogc.mongodb.net/pruebaMongoDB?retryWrites=true&w=majority"
@@ -120,4 +120,5 @@ def log_origin():
 
 if __name__ == '__main__':
     app.run(port=5001)
+
 
