@@ -14,4 +14,6 @@ EXPOSE 5002
 ENV FLASK_APP=app-login.py
 ENV FLASK_RUN_HOST=0.0.0.0
 
-CMD ["flask", "run"]
+#CMD ["flask", "run"]
+CMD ["python", "app-login.py"]
+
