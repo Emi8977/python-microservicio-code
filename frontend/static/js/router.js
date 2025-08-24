@@ -1,34 +1,41 @@
-// Contenedor donde se renderizarán las páginas
-console.log("router cargado ✅");
+// router.js
+console.log("✅ Router cargado");
+
 const appContainer = document.getElementById("app");
 
-// Mapea rutas a endpoints de tu backend-index
+// Mapa de rutas → archivos HTML de tu frontend
 const routes = {
-  "/": "/",
-  "/login": "/login",
-  "/register": "/register",
-  "/dashboard": "/dashboard"
+  "/": "/templates/index.html",
+  "/login": "/templates/login.html",
+  "/register": "/templates/register.html",
+  "/dashboard": "/templates/dashboard.html"
 };
 
-// Función que carga y renderiza una página
+// Función que carga y renderiza una página dentro de #app
 async function renderPage(path) {
   try {
-    const endpoint = routes[path] || "/";
-    const res = await fetch(endpoint);
-    if (!res.ok) throw new Error(`No se pudo cargar ${path}`);
+    const file = routes[path] || routes["/"];
+    const res = await fetch(file);
+    if (!res.ok) throw new Error(`No se pudo cargar ${file}`);
+
     const html = await res.text();
     appContainer.innerHTML = html;
 
-    // Aquí podés volver a inicializar tu JS de la página
-    if (path === "/login") import("/static/js/login.js");
-    if (path === "/register") import("/static/js/register.js");
-    if (path === "/dashboard") import("/static/js/dashboard.js");
+    // Reinyectar lógica JS de cada vista (si la tuvieras separada)
+    if (path === "/login") import("/static/js/login.js").catch(() => {});
+    if (path === "/register") import("/static/js/register.js").catch(() => {});
+    if (path === "/dashboard") import("/static/js/dashboard.js").catch(() => {});
+
   } catch (err) {
-    appContainer.innerHTML = `<h2>Error cargando la página</h2><p>${err.message}</p>`;
+    console.error("❌ Error en renderPage:", err);
+    appContainer.innerHTML = `
+      <h2>Error cargando la página</h2>
+      <p>${err.message}</p>
+    `;
   }
 }
 
-// Captura clicks en todos los enlaces internos
+// Intercepta clicks en todos los <a href="/...">
 document.addEventListener("click", (e) => {
   const link = e.target.closest("a");
   if (!link) return;
@@ -41,10 +48,10 @@ document.addEventListener("click", (e) => {
   }
 });
 
-// Soporte para botón “atrás” / “adelante”
+// Maneja botón atrás/adelante del navegador
 window.addEventListener("popstate", () => {
   renderPage(window.location.pathname);
 });
 
-// Inicializa la página al cargar
+// Inicializa la página actual cuando carga el sitio
 renderPage(window.location.pathname);
