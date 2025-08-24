@@ -14,7 +14,7 @@ static_dir = os.path.abspath(os.path.join(base_dir, '..', 'frontend-service', 's
 
 app = Flask(__name__, template_folder=template_dir, static_folder=static_dir)
 #app = Flask(__name__, static_folder='static', template_folder='templates')
-CORS(app, resources={r"/api/*": {"origins": [
+CORS(app, resources={r"/auth/api/*": {"origins": [
     "http://127.0.0.1:5000",
     "http://127.0.0.1:5002",
     "http://127.0.0.1:5003",
@@ -31,7 +31,7 @@ app.config["MONGO_URI"] = "mongodb+srv://actividadesitu:marcopolo89@micluster123
 
 mongo = PyMongo(app)
 
-@app.route('/api/login', methods=['GET', 'POST'])
+@app.route('/auth/api/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         username = request.json.get('username')  # ← si estás usando JS y fetch
@@ -57,3 +57,4 @@ def dashboard_proxy():
 
 if __name__ == '__main__':
     app.run(port=5002)
+
