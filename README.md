@@ -7,9 +7,9 @@ Frontend:
    3. Javascript
 Backend:
    1. Python con framework Flask
-   2. API Gateway de KONG
+   2. Gateway hecho con Javascript
 Base de datos:
-   1. MongoAtlas
+   MongoAtlas
 
 ### Arquitectura del software
 La aplicacion tendra una arquitectura de microservicios con una API Gateway de KONG
