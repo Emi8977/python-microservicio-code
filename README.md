@@ -2,9 +2,9 @@
 ## Proyecto de microservicios con python
 ### Tecnologias
 Frontend:
-   1. HTML
-   2. CSS
-   3. Javascript
+   HTML
+ CSS
+Javascript
 Backend:
    1. Python con framework Flask
    2. Gateway hecho con Javascript
