@@ -3,15 +3,16 @@
 ### Tecnologias
 
 Frontend:
-HTML
-CSS
-Javascript
+   1. HTML
+   2. CSS
+   3. Javascript
 
 Backend:
    1. Python con framework Flask
    2. Gateway hecho con Javascript
+
 Base de datos:
-   MongoAtlas
+   1. MongoAtlas
 
 ### Arquitectura del software
 La aplicacion tendra una arquitectura de microservicios con una API Gateway de KONG
